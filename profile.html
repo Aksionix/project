@@ -22,17 +22,16 @@
             </button>
             <div class="collapse navbar-collapse nav-buttons" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html" data-page-link="index.html">Домашня сторінка</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#brand">Магазин</a>
+                    <li class="nav-item dropdown nav-shop-dropdown">
+                        <a class="nav-link dropdown-toggle" href="index.html#brand" id="shopMenuProfile" role="button" data-bs-toggle="dropdown" aria-expanded="false">Магазин</a>
+                        <ul class="dropdown-menu nav-shop-menu" aria-labelledby="shopMenuProfile">
+                            <li><a class="dropdown-item" href="index.html">Домашня сторінка</a></li>
+                            <li><a class="dropdown-item" href="index.html#brand">Категорії</a></li>
+                            <li><a class="dropdown-item" href="index.html#footer">Контакти</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="news.html" data-page-link="news.html">Новини</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html#footer">Контакти</a>
                     </li>
                     <li class="nav-item nav-icons">
                         <a class="nav-link icon-link" href="cart.html" data-page-link="cart.html" aria-label="Кошик">

@@ -15,6 +15,28 @@
     align-items: center;
     justify-content: center;
 }
+
+.nav-shop-dropdown {
+    position: relative;
+}
+
+.nav-shop-menu {
+    border: none;
+    border-radius: 14px;
+    padding: 0.75rem 0;
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+}
+
+.nav-shop-menu .dropdown-item {
+    padding: 0.55rem 1.25rem;
+    color: #222;
+    font-weight: 500;
+}
+
+.nav-shop-menu .dropdown-item:hover {
+    background: #faf1f5;
+    color: palevioletred;
+}
 *{
     margin: 0;
     padding: 0;
@@ -118,6 +140,13 @@ button:hover{
     margin-left: 5px;
 }
 
+@media only screen and (min-width: 992px) {
+    .nav-shop-dropdown:hover .nav-shop-menu {
+        display: block;
+        margin-top: 0;
+    }
+}
+
 @media only screen and (max-width:900px){
     .nav-buttons{
         margin: 10px;
@@ -135,6 +164,11 @@ button:hover{
     }
     .nav-buttons ul .fas{
         margin: 20px 5px 10px 20px;
+    }
+
+    .nav-shop-menu {
+        box-shadow: none;
+        padding: 0.25rem 0 0.5rem;
     }
 }
 
