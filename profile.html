@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="uk">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SuperClothing | Профіль</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white py-3 fixed-top">
+        <div class="container-fluid">
+            <a href="index.html"><img class="site-logo" src="assets/imgs/logo.jpg" alt="SuperClothing logo"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse nav-buttons" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html" data-page-link="index.html">Домашня сторінка</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#brand">Магазин</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="news.html" data-page-link="news.html">Новини</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#footer">Контакти</a>
+                    </li>
+                    <li class="nav-item nav-icons">
+                        <a class="nav-link icon-link" href="cart.html" data-page-link="cart.html" aria-label="Кошик">
+                            <i class="fa-solid fa-store"></i>
+                            <span class="ms-1" data-cart-count>0</span>
+                        </a>
+                        <a class="nav-link icon-link" href="profile.html" data-page-link="profile.html" aria-label="Профіль">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Профіль користувача</h1>
+            <p>Тут зібрані ваші контактні дані та історія покупок.</p>
+        </div>
+    </section>
+
+    <section class="profile-section">
+        <div class="container">
+            <div id="auth-guest-panel" class="profile-card">
+                <div class="mb-4">
+                    <h3 class="mb-1">Вхід або реєстрація</h3>
+                    <p class="status-text mb-0">Увійдіть, щоб переглядати профіль і свої замовлення.</p>
+                </div>
+                <form id="auth-form">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="auth-email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="auth-email" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="auth-password" class="form-label">Пароль</label>
+                            <input type="password" class="form-control" id="auth-password" minlength="6" required>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-wrap gap-2 mt-4">
+                        <button type="submit">Увійти</button>
+                        <button type="button" id="register-btn">Зареєструватися</button>
+                    </div>
+                    <p id="auth-status" class="status-text mt-3 mb-0"></p>
+                </form>
+            </div>
+
+            <div id="admin-login-panel" class="profile-card mt-4 d-none">
+                <div class="mb-4">
+                    <h3 class="mb-1">Вхід адміністратора</h3>
+                    <p class="status-text mb-0">Увійдіть з обліковими даними адміністратора, щоб перейти до адмін-панелі.</p>
+                </div>
+                <form id="admin-login-form">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label for="admin-login-email" class="form-label">Логін адміністратора</label>
+                            <input type="email" class="form-control" id="admin-login-email" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="admin-login-password" class="form-label">Пароль адміністратора</label>
+                            <input type="password" class="form-control" id="admin-login-password" required>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <button type="submit">Увійти як адміністратор</button>
+                    </div>
+                    <p id="admin-login-status" class="status-text mt-3 mb-0"></p>
+                </form>
+            </div>
+
+            <div id="auth-user-panel" class="profile-card d-none">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+                    <div>
+                        <h3 class="mb-1">Обліковий запис</h3>
+                        <p class="status-text mb-0">Ви увійшли як <span id="auth-user-email"></span></p>
+                    </div>
+                    <button type="button" id="logout-btn">Вийти</button>
+                </div>
+            </div>
+
+            <div id="profile-private-content" class="d-none">
+                <div class="profile-card profile-layout mt-4">
+                    <div class="profile-summary-panel">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+                        <div>
+                            <h3 class="mb-1">Мій профіль</h3>
+                            <p class="status-text mb-0">Контактні дані для замовлень і сповіщень.</p>
+                        </div>
+                        <button type="button" id="edit-profile-btn">Редагувати профіль</button>
+                    </div>
+
+                    <div class="profile-vertical-details">
+                        <div class="profile-info-box">
+                            <p class="status-text mb-1">Повне ім'я</p>
+                            <h5 id="profile-summary-name" class="mb-0">Не вказано</h5>
+                        </div>
+                        <div class="profile-info-box">
+                            <p class="status-text mb-1">Email</p>
+                            <h5 id="profile-summary-email" class="mb-0">Не вказано</h5>
+                        </div>
+                        <div class="profile-info-box">
+                            <p class="status-text mb-1">Телефон</p>
+                            <h5 id="profile-summary-phone" class="mb-0">Не вказано</h5>
+                        </div>
+                        <div class="profile-info-box">
+                            <p class="status-text mb-1">Місто</p>
+                            <h5 id="profile-summary-city" class="mb-0">Не вказано</h5>
+                        </div>
+                        <div class="profile-info-box">
+                            <p class="status-text mb-1">Адреса</p>
+                            <h5 id="profile-summary-address" class="mb-0">Не вказано</h5>
+                        </div>
+                        <div class="profile-info-box">
+                            <p class="status-text mb-1">Статус</p>
+                            <h5 class="mb-0">Постійний клієнт</h5>
+                        </div>
+                    </div>
+                    </div>
+
+                    <div id="profile-form-panel" class="profile-form-panel d-none">
+                    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+                        <div>
+                            <h3 class="mb-1">Редагування даних</h3>
+                            <p class="status-text mb-0">Оновіть інформацію, яку бачить менеджер під час оформлення замовлення.</p>
+                        </div>
+                        <button type="button" id="close-profile-form" class="btn btn-outline-dark">Скасувати</button>
+                    </div>
+
+                    <form id="profile-form">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="profile-name" class="form-label">Ім'я</label>
+                                <input type="text" class="form-control" id="profile-name" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="profile-surname" class="form-label">Прізвище</label>
+                                <input type="text" class="form-control" id="profile-surname" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="profile-email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="profile-email" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="profile-phone" class="form-label">Телефон</label>
+                                <input type="tel" class="form-control" id="profile-phone" placeholder="+380 67 123 45 67" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="profile-city" class="form-label">Місто</label>
+                                <input type="text" class="form-control" id="profile-city" required>
+                            </div>
+                            <div class="col-12">
+                                <label for="profile-address" class="form-label">Адреса</label>
+                                <input type="text" class="form-control" id="profile-address" required>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button type="submit">Зберегти</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+
+                <div class="profile-card orders-card mt-4">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+                    <div>
+                        <h3 class="mb-1">Мої замовлення</h3>
+                        <p class="status-text mb-0">Ваші покупки в одному місці.</p>
+                    </div>
+                </div>
+                <div id="profile-orders-list"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer" class="mt-5 py-5">
+        <div class="row container mx-auto pt-5">
+            <div class="footer-one col-lg-3 col-md-6 col-sm-12">
+                <img class="footer-logo" src="assets/imgs/logo.jpg" alt="SuperClothing logo">
+                <p class="pt-3">Ваші дані завжди під рукою, коли захочеться повернутися до покупок.</p>
+            </div>
+            <div class="footer-one col-lg-3 col-md-6 col-sm-12">
+                <h5 class="pb-2">Швидкі переходи</h5>
+                <ul class="text-uppercase">
+                    <li><a href="index.html">Головна</a></li>
+                    <li><a href="cart.html">Кошик</a></li>
+                    <li><a href="news.html">Новини</a></li>
+                    <li><a href="index.html#shoes">Взуття</a></li>
+                    <li><a href="index.html#accessories">Аксесуари</a></li>
+                </ul>
+                <button type="button" id="footer-admin-toggle" class="footer-admin-toggle mt-3">Вхід для персоналу</button>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
+    <script type="module" src="assets/js/main.js"></script>
+</body>
+
+</html>
