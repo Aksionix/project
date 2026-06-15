@@ -16,7 +16,7 @@ import {
     registerWithEmail,
     waitForAuthReady
 } from "./modules/auth-service.js";
-import { isAdminCredentials, isAdminUser } from "./modules/admin-config.js";
+import { isAdminUser } from "./modules/admin-config.js";
 
 const CART_STORAGE_KEY = 'superclothing-cart';
 const CART_ITEM_LIMIT = 10;
@@ -1028,18 +1028,12 @@ async function initCheckoutForm() {
 
 async function initProfilePage() {
     const authForm = document.getElementById('auth-form');
-    const adminLoginForm = document.getElementById('admin-login-form');
-    const footerAdminToggle = document.getElementById('footer-admin-toggle');
     const authGuestPanel = document.getElementById('auth-guest-panel');
-    const adminLoginPanel = document.getElementById('admin-login-panel');
     const authUserPanel = document.getElementById('auth-user-panel');
     const authUserEmail = document.getElementById('auth-user-email');
     const authStatus = document.getElementById('auth-status');
-    const adminLoginStatus = document.getElementById('admin-login-status');
     const authEmailInput = document.getElementById('auth-email');
     const authPasswordInput = document.getElementById('auth-password');
-    const adminEmailInput = document.getElementById('admin-login-email');
-    const adminPasswordInput = document.getElementById('admin-login-password');
     const registerButton = document.getElementById('register-btn');
     const logoutButton = document.getElementById('logout-btn');
     const privateContent = document.getElementById('profile-private-content');
@@ -1099,13 +1093,9 @@ async function initProfilePage() {
 
     const showSignedOutState = () => {
         authGuestPanel?.classList.remove('d-none');
-        adminLoginPanel?.classList.add('d-none');
         authUserPanel?.classList.add('d-none');
         privateContent?.classList.add('d-none');
         authPasswordInput.value = '';
-        if (adminPasswordInput) {
-            adminPasswordInput.value = '';
-        }
         applyProfileData({});
 
         if (formPanel && editButton) {
@@ -1125,7 +1115,6 @@ async function initProfilePage() {
         }
 
         authGuestPanel?.classList.add('d-none');
-        adminLoginPanel?.classList.add('d-none');
         authUserPanel?.classList.remove('d-none');
         privateContent?.classList.remove('d-none');
 
@@ -1177,41 +1166,6 @@ async function initProfilePage() {
         };
     }
 
-    if (adminLoginForm && adminEmailInput && adminPasswordInput && adminLoginStatus) {
-        adminLoginForm.onsubmit = async (event) => {
-            event.preventDefault();
-
-            const email = adminEmailInput.value.trim();
-            const password = adminPasswordInput.value;
-
-            if (!isAdminCredentials(email, password)) {
-                adminLoginStatus.textContent = 'Невірний логін або пароль адміністратора.';
-                return;
-            }
-
-            adminLoginStatus.textContent = 'Виконується вхід адміністратора...';
-
-            try {
-                await loginWithEmail(email, password);
-                adminLoginStatus.textContent = '';
-                window.location.href = 'admin.html';
-            } catch (error) {
-                console.error('Помилка входу адміністратора:', error);
-                adminLoginStatus.textContent = getAuthErrorMessage(error);
-            }
-        };
-    }
-
-    if (footerAdminToggle && adminLoginPanel) {
-        footerAdminToggle.onclick = () => {
-            adminLoginPanel.classList.toggle('d-none');
-            if (!adminLoginPanel.classList.contains('d-none')) {
-                adminLoginPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                adminEmailInput?.focus();
-            }
-        };
-    }
-
     if (logoutButton) {
         logoutButton.onclick = async () => {
             await logoutUser();
@@ -1251,9 +1205,6 @@ async function initProfilePage() {
     observeAuthState(async (user) => {
         if (user) {
             authStatus.textContent = '';
-            if (adminLoginStatus) {
-                adminLoginStatus.textContent = '';
-            }
             await showSignedInState(user);
         } else {
             showSignedOutState();
