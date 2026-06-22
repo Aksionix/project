@@ -1015,8 +1015,8 @@ async function initCheckoutForm() {
             emailInput.value = order.customer.email;
             cityInput.value = order.customer.city;
             addressInput.value = order.customer.address;
-            checkoutStatus.textContent = 'Замовлення оформлено. Дякуємо за покупку.';
-            showModal('Замовлення успішно оформлено.');
+            checkoutStatus.textContent = 'Замовлення оформлено. Очікуйте дзвінка менеджера для підтвердження.';
+            showModal('Замовлення успішно оформлено. Очікуйте дзвінка менеджера для підтвердження.');
         } catch (error) {
             console.error('Помилка оформлення замовлення:', error);
             checkoutStatus.textContent = error?.message === 'AUTH_REQUIRED'
